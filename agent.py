@@ -6,12 +6,13 @@ from livekit.plugins import (
     noise_cancellation,
 )
 from livekit.plugins import google
+from prompts import AGENT_INSTRUCTION, SESSION_INSTRUCTION
 load_dotenv()
 
 
 class Assistant(Agent):
     def __init__(self) -> None:
-        super().__init__(instructions="You are a helpful voice AI assistant.")
+        super().__init__(instructions=AGENT_INSTRUCTION)
 
 
 async def entrypoint(ctx: agents.JobContext):
@@ -33,7 +34,7 @@ async def entrypoint(ctx: agents.JobContext):
     )
 
     await session.generate_reply(
-        instructions="Greet the user and offer your assistance."
+        instructions=SESSION_INSTRUCTION,
     )
 
 
